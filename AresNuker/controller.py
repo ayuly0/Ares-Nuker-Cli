@@ -29,7 +29,7 @@ class Controller:
 
 	def show_info(self) -> None:
 		print(Center.XCenter(fade.purplepink(banner)))
-		rprint(f' [purple]> Made by _0xfc (Ayuly#3851)[white]')
+		rprint(f'\n [purple]> Made by _0xfc (Ayuly#3851)[white]')
 	
 	def bot_nuker_menu(self) -> None:
 		rprint(Align.center(Panel.fit(f'1 - Nuke | 2 - Get Admin | 3 -  List All Guild | 4 - Create Invite Server | 5 - Bot Invite'), vertical="middle"))
@@ -52,6 +52,8 @@ class Controller:
 					choice = input(' > Choice : ')
 					if choice == '1':
 						Nuke()
+					elif choice == 'cls':
+						clear()
 			else:
 				while True:
 					clear()

@@ -69,26 +69,5 @@ def CreateConfig():
 
 def LoadsConfig():
 	CreateConfig() if not config_file_exists else None
-	bot_token = config.get('bot', 'token')
-	bot_prefix = config.get('bot', 'prefix')
-	bot_status = config.get('bot', 'status')
-	bot_version = config.get('bot', 'version')
-
-	guild_name = config.get('nuke', 'guild_name')
-	channel_name = config.get('nuke', 'channel_name')
-	role_name = config.get('nuke', 'role_name')
-	webhook_name = config.get('nuke', 'webhook_name')
-	ban_reason = config.get('nuke', 'ban_reason')
-	spam_content = config.get('nuke', 'spam_content')
-	get_admin = config.getboolean('nuke', 'get_admin')
-	ban_all = config.getboolean('nuke', 'ban_all')
-
-	user_id = config.get('discord', 'user_id')
-	guild_id = config.get('discord', 'guild_id')
-	white_users_id = json.loads(config.get('discord', 'white_guilds_id'))
-	white_guilds_id = json.loads(config.get('discord', 'white_guilds_id'))
-
-	account_token = config.get('account', 'token')
-	account_last_message = config.get('account', 'last_message')
 
 	return config
