@@ -10,7 +10,7 @@ config_file_exists = os.path.exists('config.ini')
 config.read('config.ini')
 
 def CreateConfig():
-	print('[≫] config.ini not found')
+	console.error('config.ini not found')
 	config.add_section('bot')
 	config.set('bot', 'token', 'None')
 	config.set('bot', 'prefix', '!')
@@ -23,7 +23,7 @@ def CreateConfig():
 	config.set('nuke', 'role_name', 'Nuked')
 	config.set('nuke', 'webhook_name', 'Nuked')
 	config.set('nuke', 'ban_reason', 'Nuked')
-	config.set('nuke', 'spam_content', {
+	config.set('nuke', 'spam_content', '''{
 		"content": "@everyone\n **[≫] Raided by NukerZ [≪]**",
 		  "tts": True,
 		  "embeds": [
@@ -46,7 +46,7 @@ def CreateConfig():
 		      "timestamp": "2023"
 		    }
 		  ]
-		})
+		}''')
 	config.set('nuke', 'get_admin', 'true')
 	config.set('nuke', 'ban_all', 'true')
 	config.set('nuke', 'amount_channel', '100')
@@ -89,6 +89,6 @@ def LoadsConfig():
 	white_guilds_id = json.loads(config.get('discord', 'white_guilds_id'))
 
 	account_token = config.get('account', 'token')
-	account_last_message = config.get('account', 'last_messgae')
+	account_last_message = config.get('account', 'last_message')
 
 	return config
