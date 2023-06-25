@@ -5,8 +5,9 @@ from Utils import clear
 from rich import print as rprint
 from rich.panel import Panel
 from rich.align import Align
-import global_vars
-import fade
+from AresCore.AresModule import Nuke
+import global_vars, fade
+
 
 banner = f"""
  ▄▄▄       ██▀███  ▓█████   ██████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
@@ -31,16 +32,32 @@ class Controller:
 		rprint(f' [purple]> Made by _0xfc (Ayuly#3851)[white]')
 	
 	def bot_nuker_menu(self) -> None:
-		# menu = f'{Box.DoubleCube("1 - Nuke")}{Box.DoubleCube("1 - Nuke")}'
-		# print(Center.XCenter(menu))
 		rprint(Align.center(Panel.fit(f'1 - Nuke | 2 - Get Admin | 3 -  List All Guild | 4 - Create Invite Server | 5 - Bot Invite'), vertical="middle"))
 		
-	def control(self):
+	def account_nuker_menu(self) -> None:
+		rprint(Align.center(Panel.fit(f'1 - Nuke'), vertical="middle"))
+
+
+	def control(self) -> None:
 		while True:
 			clear()
 			self.show_info()
-			self.bot_nuker_menu()
-			choice = input('Choice : ')
+			rprint(Align.center(Panel.fit(f'1 - BotNuker | 2 - AccountNuker'), vertical="middle"))
+			choice = input(' > Choice : ')
+			if choice == '1':
+				while True:
+					clear()
+					self.show_info()
+					self.bot_nuker_menu()
+					choice = input(' > Choice : ')
+					if choice == '1':
+						Nuke()
+			else:
+				while True:
+					clear()
+					self.show_info()
+					self.account_nuker_menu()
+					choice = input(' > Choice : ')
 			
 
 controller = Controller()

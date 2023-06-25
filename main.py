@@ -1,6 +1,4 @@
-from AresCore import StartRequestMaker
-from AresCore.AresModule import Nuke
+from AresNuker import Controller
 
-# StartRequestMaker()
-
-Nuke()
+controller = Controller()
+controller.control()
