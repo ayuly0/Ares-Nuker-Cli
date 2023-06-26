@@ -26,10 +26,10 @@ def RequestMaker():
 						console.warrning(f'Rate limiting has been reached, and this request has been cancelled due to retry-after time is greater than 5 seconds: Wait {str(r["retry_after"])} more seconds.')
 						q.task_done()
 						continue
-					console.warrning(f'Rate limiting has been reached: Wait {str(r["retry_after"])} more seconds.')
+					console.warning(f'Rate limiting has been reached: Wait {str(r["retry_after"])} more seconds.')
 				q.put((requesting, url, headers, payload))
 			elif True and 'code' in r:
-				console.warrning('Request cancelled due to -> ' + r['message'])
+				console.warning('Request cancelled due to -> ' + r['message'])
 		except json.decoder.JSONDecodeError:
 			pass
 		except requests.exceptions.ConnectTimeout:
