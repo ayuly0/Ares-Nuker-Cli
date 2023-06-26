@@ -23,34 +23,19 @@ def CreateConfig():
 	config.set('nuke', 'role_name', 'Nuked')
 	config.set('nuke', 'webhook_name', 'Nuked')
 	config.set('nuke', 'ban_reason', 'Nuked')
-	config.set('nuke', 'spam_content', '''{
-		"content": "@everyone\n **[≫] Raided by NukerZ [≪]**",
-		  "tts": True,
-		  "embeds": [
-		    {
-		      "description": "**[≫] Get Raid [≪]**",
-		      "fields": [],
-		      "author": {
-		        "name": "NukerZ",
-		        "icon_url": "https://i.ibb.co/Gx57Vbm/imageonline-co-textimage-1.png"
-		      },
-		      "title": "Server Get Raid :)",
-		      "color": 1491362,
-		      "image": {
-		        "url": "https://i.ibb.co/Gx57Vbm/imageonline-co-textimage-1.png"
-		      },
-		      "footer": {
-		        "icon_url": "https://i.ibb.co/Gx57Vbm/imageonline-co-textimage-1.png",
-		        "text": "NukerZ"
-		      },
-		      "timestamp": "2023"
-		    }
-		  ]
-		}''')
 	config.set('nuke', 'get_admin', 'true')
 	config.set('nuke', 'ban_all', 'true')
 	config.set('nuke', 'amount_channel', '100')
 	config.set('nuke', 'amount_role', '50')
+
+	config.add_section('message')
+	config.set('message', 'content', 'AresNuker on top\nEz Nuke')
+	config.add_section('message.embed')
+	config.set('message.embed', 'title', 'Ezz Nuke')
+	config.set('message.embed', 'description', 'AresNuker On Top')
+	config.set('message.embed', 'icon_url', '')
+	config.set('message.embed', 'image_url', '')
+	config.set('message.embed', 'color', '1491362')
 
 	config.add_section('discord')
 	config.set('discord', 'user_id', '0')
