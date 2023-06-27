@@ -18,13 +18,13 @@ def bot_check() -> None:
 	clear()
 
 	rprint('[purple] > Checking Token Bot [white]')
+	rprint('[purple] > Checking ID Guild [white]')
 	if CheckToken(token, 'bot'):
 		rprint('[chartreuse3] > Token bot is vaild [white]')
 	else:
 		rprint('[red3] > Token bot is invaild [white]')
 		os._exit(0)
 
-	rprint('[purple] > Checking ID Guild [white]')
 	if IsGuild():
 		rprint('[chartreuse3] > ID Guild is vaild [white]')
 	else:

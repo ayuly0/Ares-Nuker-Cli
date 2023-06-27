@@ -1,3 +1,4 @@
+__import__('sys').path.append('../')
 from .get_all_guilds import _GetAllGuilds
 from .channels import GetChannels
 from AresNuker import Console

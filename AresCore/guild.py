@@ -29,11 +29,13 @@ def LeaveGuilds() -> None:
 	for guild in guilds:
 		id = guild['id']
 		name = guild['name']
-		try:
-			q.put((requests.delete, f'https://discord.com/api/v8/users/@me/guilds/{id}', headers_account, payload))
-			console.log(f'Left Server {name}')
-		except:
-			console.error(f'Unble to left server {name}')
+		owner = guild['owner']
+		if not owner:
+			try:
+				q.put((requests.delete, f'https://discord.com/api/v8/users/@me/guilds/{id}', headers_account, payload))
+				console.log(f'Left Server → {name}')
+			except:
+				console.error(f'Unble to left server → {name}')
 
 def DeleteGuilds() -> None:
 	guilds = _GetAllGuildsUser()
@@ -41,10 +43,10 @@ def DeleteGuilds() -> None:
 		id = guild['id']
 		name = guild['name']
 		try:
-			q.put((requests.delete, f'https://discord.com/api/v8/guilds/{id}', headers_account, None))
-			console.log(f'Deleted Server {name}')
+			q.put((requests.post, f'https://discord.com/api/v9/guilds/{id}/delete', headers_account, None))
+			console.log(f'Deleted Server → {name}')
 		except:
-			console.error(f'Unble to delete server {name}')
+			console.error(f'Unble to delete server → {name}')
 
 def CreateGuilds() -> None:
 	payload = {

@@ -6,7 +6,7 @@ from rich.align import Align
 from rich.console import Console 
 from AresNuker import Console as Console_
 from AresModule import Nuke, AccountNuke, bot_check, user_check
-from AresCore import (SetWorstSettings, GetUsername, CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles, LeaveGuilds, CreateGuilds, BlockFriends, DeleteGuilds)
+from AresCore import (CloseDMs, SetWorstSettings, GetUsername, CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles, LeaveGuilds, CreateGuilds, BlockFriends, DeleteGuilds)
 import global_vars, fade, os, time
 
 console = Console()
@@ -55,7 +55,7 @@ class Controller:
 │ [grey78][[purple]2[grey78]] [deep_pink2]Leave Guild        [grey78]│
 │ [grey78][[purple]3[grey78]] [deep_pink2]Spam Guild         [grey78]│
 │ [grey78][[purple]4[grey78]] [deep_pink2]Block Friends      [grey78]│
-│ [grey78][[purple]5[grey78]] [deep_pink2]Remove DM          [grey78]│
+│ [grey78][[purple]5[grey78]] [deep_pink2]Close DM           [grey78]│
 │ [grey78][[purple]6[grey78]] [deep_pink2]Delete Server      [grey78]│
 │ [grey78][[purple]7[grey78]] [deep_pink2]Set Worst Settings [grey78]│
 └────────────────────────┘
@@ -105,7 +105,7 @@ class Controller:
 					user_check()
 					self.user_checked = not self.user_checked
 				os.system(f'title Ares Nuker v1 ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("user")}')
-				func = {1: AccountNuke, 2: LeaveGuilds, 3: CreateGuilds, 4: BlockFriends, 6: DeleteGuilds, 7: SetWorstSettings}
+				func = {1: AccountNuke, 2: LeaveGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: DeleteGuilds, 7: SetWorstSettings}
 				while True:
 					clear()
 					self.show_info()

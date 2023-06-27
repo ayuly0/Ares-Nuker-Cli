@@ -42,8 +42,6 @@ def DeleteChannels() -> None:
 	for channel in channels:
 		try:
 			q.put((requests.delete, f'https://discord.com/api/v8/channels/{channel["id"]}', headers, None))
-			# r = requests.delete(f'https://discord.com/api/v8/channels/{channel["id"]}', headers = headers)
-			# print(r)
-			console.log(f'Deleted channel {channel["name"]}')
+			console.log(f'Deleted channel → {channel["name"]}')
 		except:
-			console.error(f'Unble to delete channel {channel["name"]}')
+			console.error(f'Unble to delete channel → {channel["name"]}')

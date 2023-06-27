@@ -1,3 +1,4 @@
+__import__('sys').path.append('../')
 import global_vars, requests, json
 from AresNuker import Console
 
