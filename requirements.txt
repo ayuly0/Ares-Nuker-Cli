@@ -1,0 +1,7 @@
+disocrd
+pystyle
+colorama
+rich
+requests
+fade
+pypresence

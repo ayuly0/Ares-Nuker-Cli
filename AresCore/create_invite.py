@@ -13,6 +13,12 @@ def GetBotId() -> int:
 	id = int(json.loads(r.text)['id'])
 	return id
 
+def GetBotUsername() -> str:
+	r = requests.get('https://discord.com/api/v8/users/@me', headers = headers)
+	username = json.loads(r.text)['username']
+	discriminator = json.loads(r.text)['discriminator']
+	return f'{username}#{discriminator}'
+
 def BotInvite() -> None:
 	id = GetBotId()
 	link = f"https://discord.com/api/oauth2/authorize?client_id={id}&permissions=8&scope=bot"

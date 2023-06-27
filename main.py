@@ -1,10 +1,10 @@
 from AresNuker import Controller
 from rich import print as rprint
-from AresCore import CheckToken, IsGuild
+from AresCore import CheckToken, IsGuild, GetBotUsername, GetAllGuilds
 from Utils import clear
 import global_vars, os
 
-os.system('title Ares Nuker v1 ^| by _0xfc (Ayuly#3851)')
+
 
 config = global_vars.config
 
@@ -22,7 +22,10 @@ if IsGuild():
 	rprint('[chartreuse3] > ID Guild is vaild [white]')
 else:
 	rprint('[red3] > ID Guild is invaild [white]')
+	GetAllGuilds()
 	os._exit(0)
+
+os.system(f'title Ares Nuker v1 ^| by _0xfc (Ayuly#3851) ^| login as {GetBotUsername()}')
 
 controller = Controller()
 controller.control()

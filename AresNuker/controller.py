@@ -6,7 +6,7 @@ from rich.align import Align
 from rich.console import Console 
 from AresNuker import Console as Console_
 from AresModule import Nuke
-from AresCore import CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite
+from AresCore import CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles
 import global_vars, fade, os, time
 
 console = Console()
@@ -39,10 +39,10 @@ class Controller:
 	def bot_nuker_menu(self) -> None:
 		menu = """
 ┌─────────────────────────┬────────────────────────┐
-│   [grey78][[purple]1[grey78]] [deep_pink2]Nuke[white]              │   [grey78][[purple]5[grey78]] [deep_pink2]Get Admin[white]        │
-│   [grey78][[purple]2[grey78]] [deep_pink2]Delete Channels[white]   │   [grey78][[purple]6[grey78]] [deep_pink2]Get All Guild[white]    │
-│   [grey78][[purple]3[grey78]] [deep_pink2]Create Channels[white]   │   [grey78][[purple]7[grey78]] [deep_pink2]Invite Guild[white]     │
-│   [grey78][[purple]4[grey78]] [deep_pink2]Spam Message[white]      │   [grey78][[purple]8[grey78]] [deep_pink2]Bot Invite[white]       │
+│   [grey78][[purple]1[grey78]] [deep_pink2]Nuke[grey78]              │   [grey78][[purple]5[grey78]] [deep_pink2]Get Admin[grey78]        │
+│   [grey78][[purple]2[grey78]] [deep_pink2]Delete Channels[grey78]   │   [grey78][[purple]6[grey78]] [deep_pink2]Get All Guild[grey78]    │
+│   [grey78][[purple]3[grey78]] [deep_pink2]Create Channels[grey78]   │   [grey78][[purple]7[grey78]] [deep_pink2]Invite Guild[grey78]     │
+│   [grey78][[purple]4[grey78]] [deep_pink2]Spam Message[grey78]      │   [grey78][[purple]8[grey78]] [deep_pink2]Bot Invite[grey78]       │
 └─────────────────────────┴────────────────────────┘
 		"""
 		rprint(Align.center(menu))
@@ -56,14 +56,14 @@ class Controller:
 			self.show_info()
 			menu = """
 ┌────────────────────┐
-│ [white][[purple]1[white]] Bot Nuker      │
-│ [[purple]2[white]] Account Nuker  │
+│ [white][[purple]1[white]] [grey78]Bot Nuker      │
+│ [[purple]2[white]][grey78] Account Nuker  │
 └────────────────────┘
 			"""
 			rprint(Align.center(menu, vertical="middle"))
 			choice = console.input(' [white][[purple]~[white]] [purple]>[grey78] ')
 			if choice == '1':
-				func = {1: Nuke, 2: DeleteChannels, 3: CreateChannels, 4: SendMessage, 5: GetAdmin, 6: GetAllGuilds, 7: CreateInvite, 8: BotInvite}
+				func = {1: Nuke, 2: DeleteChannels, 3: CreateChannels, 4: SendMessage, 5: GetAdmin, 6: GetAllGuilds, 7: CreateInvite, 8: BotInvite, 9: CreateRoles}
 				while True:
 					clear()
 					self.show_info()
