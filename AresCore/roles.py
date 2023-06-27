@@ -8,7 +8,7 @@ q = GetQ()
 
 headers = global_vars.headers
 config = global_vars.config
-guild_id = config['discord']['guild_id']
+guild_id = global_vars.guild_id
 
 def CreateRoles():
 	name = config['nuke']['role_name']

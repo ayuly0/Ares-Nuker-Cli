@@ -10,7 +10,7 @@ headers = global_vars.headers
 config = global_vars.config
 channel_name = config['nuke']['channel_name']
 amount_channel = int(config['nuke']['amount_channel'])
-guild_id = config['discord']['guild_id']
+guild_id = global_vars.guild_id
 
 def CreateChannels() -> None:
 	payload = {

@@ -1,31 +1,27 @@
-from AresNuker import Controller, Console
+from AresNuker import Controller
+from rich import print as rprint
 from AresCore import CheckToken, IsGuild
 from Utils import clear
-import global_vars, os, time
+import global_vars, os
+
+os.system('title Ares Nuker v1 ^| by _0xfc (Ayuly#3851)')
 
 config = global_vars.config
-console = Console()
 
 clear()
 
-console.info('Checking Token Bot')
-time.sleep(1)
+rprint('[purple] > Checking Token Bot [white]')
 if CheckToken():
-	console.info('Token bot is vaild')
-	time.sleep(1)
+	rprint('[chartreuse3] > Token bot is vaild [white]')
 else:
-	console.warning('Token bot is invaild')
-	time.sleep(1)
+	rprint('[red3] > Token bot is invaild [white]')
 	os._exit(0)
 
-console.info('Checking ID Guild')
-time.sleep(1)
+rprint('[purple] > Checking ID Guild [white]')
 if IsGuild():
-	console.info('ID Guild is vaild')
-	time.sleep(1)
+	rprint('[chartreuse3] > ID Guild is vaild [white]')
 else:
-	console.warning('ID Guild is invaild')
-	time.sleep(1)
+	rprint('[red3] > ID Guild is invaild [white]')
 	os._exit(0)
 
 controller = Controller()

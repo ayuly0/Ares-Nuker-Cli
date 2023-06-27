@@ -1,15 +1,16 @@
 __import__('sys').path.append('../')
-from pystyle import Box, Colors, Colorate, Center
-from colorama import  Fore
+from pystyle import Colors, Center
 from Utils import clear
 from rich import print as rprint
-from rich.panel import Panel
 from rich.align import Align
 from rich.console import Console 
+from AresNuker import Console as Console_
 from AresModule import Nuke
-import global_vars, fade, os
+from AresCore import CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite
+import global_vars, fade, os, time
 
 console = Console()
+console_ = Console_()
 
 banner = f"""
  ▄▄▄       ██▀███  ▓█████   ██████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
@@ -32,39 +33,69 @@ class Controller:
 	def show_info(self) -> None:
 		print(fade.purplepink(Center.XCenter(banner)))
 		rprint(f'\n [purple]> Made by _0xfc (Ayuly#3851)[white]')
+		rprint(f' [deep_pink2]> Bot Nuker (done)[white]')
+		rprint(f' [red1]> Account Nuker (soon)[white]')
 	
 	def bot_nuker_menu(self) -> None:
-		rprint(Align.center(Panel.fit(f'[1] Nuke | [2] Delete Channels | [3] Create Channels | [4] Spam Webhooks'), vertical="middle"))
-		rprint(Align.center(Panel.fit(f'[5] Get Admin | [6] List All Guild | [7] Create Invite Server | [8] Bot Invite'), vertical="middle"))
-		
+		menu = """
+┌─────────────────────────┬────────────────────────┐
+│   [grey78][[purple]1[grey78]] [deep_pink2]Nuke[white]              │   [grey78][[purple]5[grey78]] [deep_pink2]Get Admin[white]        │
+│   [grey78][[purple]2[grey78]] [deep_pink2]Delete Channels[white]   │   [grey78][[purple]6[grey78]] [deep_pink2]Get All Guild[white]    │
+│   [grey78][[purple]3[grey78]] [deep_pink2]Create Channels[white]   │   [grey78][[purple]7[grey78]] [deep_pink2]Invite Guild[white]     │
+│   [grey78][[purple]4[grey78]] [deep_pink2]Spam Message[white]      │   [grey78][[purple]8[grey78]] [deep_pink2]Bot Invite[white]       │
+└─────────────────────────┴────────────────────────┘
+		"""
+		rprint(Align.center(menu))
+
 	def account_nuker_menu(self) -> None:
 		rprint(Align.center(Panel.fit(f'1 - Nuke'), vertical="middle"))
-
 
 	def control(self) -> None:
 		while True:
 			clear()
 			self.show_info()
-			rprint(Align.center(Panel.fit(f'[1] BotNuker | [2] AccountNuker'), vertical="middle"))
-			choice = console.input(' [[purple]~[white]] : ')
+			menu = """
+┌────────────────────┐
+│ [white][[purple]1[white]] Bot Nuker      │
+│ [[purple]2[white]] Account Nuker  │
+└────────────────────┘
+			"""
+			rprint(Align.center(menu, vertical="middle"))
+			choice = console.input(' [white][[purple]~[white]] [purple]>[grey78] ')
 			if choice == '1':
+				func = {1: Nuke, 2: DeleteChannels, 3: CreateChannels, 4: SendMessage, 5: GetAdmin, 6: GetAllGuilds, 7: CreateInvite, 8: BotInvite}
 				while True:
 					clear()
 					self.show_info()
 					self.bot_nuker_menu()
-					choice = console.input(' [[purple]~[white]] : ')
-					if choice == '1':
-						Nuke()
-					elif choice == 'cls':
+					choice = console.input(' [white][[purple]~/bot-nuker[white]] [purple]>[grey78] ')
+					if choice == 'cls':
 						clear()
+						continue
+					elif choice == 'back':
+						break
 					elif choice == 'exit':
 						os._exit(0)
+					try:
+						func_ = func[int(choice)]
+						func_()
+					except Exception as e:
+						console_.warning('Not Found')
+						time.sleep(1)
+
 			elif choice == '2':
 				while True:
 					clear()
 					self.show_info()
 					self.account_nuker_menu()
-					choice = console.input(' [[purple]~[white]] : ')
+					choice = console.input(' [white][[purple]~/account-nuker[white]] [purple]>[grey78] ')
+					if choice == 'cls':
+						clear()
+						continue
+					elif choice == 'back':
+						break
+					elif choice == 'exit':
+						os._exit(0)
 			elif choice == 'exit':
 				os._exit(0)
 			else:
