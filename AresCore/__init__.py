@@ -1,6 +1,6 @@
 from .is_vaild import CheckToken, IsGuild
 from .requests_maker import StartRequestMaker, GetQ
-from .guild import ChangeNameGuild, ChangeIconGuild, LeaveGuilds, CreateGuilds
+from .guild import ChangeNameGuild, ChangeIconGuild, LeaveGuilds, CreateGuilds, DeleteGuilds
 from .channels import CreateChannels, DeleteChannels
 from .roles import CreateRoles
 from .users import BanAll, SendMessage

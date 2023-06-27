@@ -1,12 +1,14 @@
 import global_vars, requests, json
 from AresNuker import Console
+from .requests_maker import GetQ
 
 console = Console()
-headers = global_vars.headers
+q = GetQ()
+headers_account = global_vars.headers_account
 
 
 def GetFriends() -> list:
-	r = requests.get('https://discord.com/api/v8/users/@me/relationships', headers = headers)
+	r = requests.get('https://discord.com/api/v8/users/@me/relationships', headers = headers_account)
 	friends = json.loads(r.text)
 	friend_list = []
 	for friend in friends:
@@ -18,4 +20,11 @@ def GetFriends() -> list:
 	return friend_list
 
 def BlockFriends() -> None:
-	pass
+	friends = GetFriends()
+	payload = {
+		'type': 2
+	}
+	for friend in friends:
+		r = requests.put(f"https://discord.com/api/v8/users/@me/relationships/{friend['id']}", headers = headers_account, json = payload)
+		# console.debug(r.text)
+		console.log(f'Blocked → {friend["name"]}')

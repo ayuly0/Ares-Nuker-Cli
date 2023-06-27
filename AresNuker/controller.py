@@ -5,8 +5,8 @@ from rich import print as rprint
 from rich.align import Align
 from rich.console import Console 
 from AresNuker import Console as Console_
-from AresModule import Nuke
-from AresCore import CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles
+from AresModule import Nuke, AccountNuke
+from AresCore import (CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles, LeaveGuilds, CreateGuilds, BlockFriends, DeleteGuilds)
 import global_vars, fade, os, time
 
 console = Console()
@@ -48,7 +48,17 @@ class Controller:
 		rprint(Align.center(menu))
 
 	def account_nuker_menu(self) -> None:
-		rprint(Align.center(Panel.fit(f'1 - Nuke'), vertical="middle"))
+		menu = """
+┌───────────────────┐
+│ [grey78][[purple]1[grey78]] [deep_pink2]Nuke          [grey78]│
+│ [grey78][[purple]2[grey78]] [deep_pink2]Leave Guild   [grey78]│
+│ [grey78][[purple]3[grey78]] [deep_pink2]Spam Guild    [grey78]│
+│ [grey78][[purple]4[grey78]] [deep_pink2]Block Friends [grey78]│
+│ [grey78][[purple]5[grey78]] [deep_pink2]Remove DM     [grey78]│
+│ [grey78][[purple]6[grey78]] [deep_pink2]Delete Server [grey78]│
+└───────────────────┘
+		"""
+		rprint(Align.center(menu, vertical="middle"))
 
 	def control(self) -> None:
 		while True:
@@ -84,6 +94,7 @@ class Controller:
 						time.sleep(1)
 
 			elif choice == '2':
+				func = {1: AccountNuke, 2: LeaveGuilds, 3: CreateGuilds, 4: BlockFriends, 6: DeleteGuilds}
 				while True:
 					clear()
 					self.show_info()
@@ -96,6 +107,13 @@ class Controller:
 						break
 					elif choice == 'exit':
 						os._exit(0)
+					try:
+						func_ = func[int(choice)]
+						func_()
+					except Exception as e:
+						raise e
+						# console_.warning('Not Found')
+						# time.sleep(1)
 			elif choice == 'exit':
 				os._exit(0)
 			else:

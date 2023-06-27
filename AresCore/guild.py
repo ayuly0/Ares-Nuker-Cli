@@ -3,10 +3,11 @@ import global_vars, requests, json
 from AresNuker import Console
 from .get_all_guilds import _GetAllGuilds
 
+console = Console()
 headers = global_vars.headers
+headers_account = global_vars.headers_account
 config = global_vars.config
 guild_id = global_vars.guild_id
-
 
 def ChangeNameGuild() -> None:
 	payload = {
@@ -22,24 +23,45 @@ def ChangeIconGuild() -> None:
 
 def LeaveGuilds() -> None:
 	guilds = _GetAllGuilds()
+	payload = {'lurking': False}
 	for guild in guilds:
 		id = guild['id']
 		name = guild['name']
 		try:
-			r = requests.delete(f'https://discord.com/api/v8/users/@me/guilds/{id}', headers = headers)
+			r = requests.delete(f'https://discord.com/api/v8/users/@me/guilds/{id}', headers = headers_account, json = payload)
 			console.log(f'Left Server {name}')
 		except:
 			console.error(f'Unble to left server {name}')
+
+def DeleteGuilds() -> None:
+	guilds = _GetAllGuilds()
+	for guild in guilds:
+		id = guild['id']
+		name = guild['name']
+		try:
+			r = requests.delete(f'https://discord.com/api/v8/guilds/{id}/', headers = headers_account)
+			console.debug(r.text)
+			input()
+			console.log(f'Deleted Server {name}')
+		except:
+			console.error(f'Unble to delete server {name}')
 
 def CreateGuilds() -> None:
 	payload = {
 		'name': config['account']['guild_name'],
 		'icon': config['account']['icon_guild'],
+		'region': 'europe', 
+		'icon': None, 
+		'channels': None
 	}
 	amount_guild = int(config['account']['amount_guild'])
-	for i in range(amount_guild):
-		try:
-			r = requests.post(f'https://discord.com/api/v8/guilds', headers = headers, json = payload)
-			console.log(f"[{i+1}/{amount_guild}] Created server {config['account']['guild_name']}")
-		except:
-			console.error(f"[{i+1}/{amount_guild}] Unble to create server {config['account']['guild_name']}")
+	r = requests.post(f'https://discord.com/api/v8/guilds', headers = headers_account, json = payload)
+	console.debug(r.text)
+	input()
+	# for i in range(amount_guild):
+	# 	try:
+			# r = requests.post(f'https://discord.com/api/v8/guilds', headers = headers_account, json = payload)
+			# console.debug(r.text)
+	# 		console.log(f"[{i+1}/{amount_guild}] Created server {config['account']['guild_name']}")
+	# 	except:
+	# 		console.error(f"[{i+1}/{amount_guild}] Unble to create server {config['account']['guild_name']}")
