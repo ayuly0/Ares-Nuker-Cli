@@ -41,6 +41,7 @@ def CreateConfig():
 	config.set('discord', 'guild_id', '0')
 	config.set('discord', 'white_users_id', '[]')
 	config.set('discord', 'white_guilds_id', '[]')
+	config.set('discord', 'presence_id', 0)
 
 	config.add_section('account')
 	config.set('account', 'token', 'None')

@@ -7,14 +7,18 @@ import global_vars, requests, json
 con = Con()
 console = Console()
 headers = global_vars.headers
+headers_account = global_vars.headers_account
 
 def GetBotId() -> int:
 	r = requests.get('https://discord.com/api/v8/users/@me', headers = headers)
 	id = int(json.loads(r.text)['id'])
 	return id
 
-def GetBotUsername() -> str:
-	r = requests.get('https://discord.com/api/v8/users/@me', headers = headers)
+def GetUsername(type: str) -> str:
+	if type == 'bot':
+		r = requests.get('https://discord.com/api/v8/users/@me', headers = headers)
+	elif type == 'user':
+		r = requests.get('https://discord.com/api/v8/users/@me', headers = headers_account)
 	username = json.loads(r.text)['username']
 	discriminator = json.loads(r.text)['discriminator']
 	return f'{username}#{discriminator}'

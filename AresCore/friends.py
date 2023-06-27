@@ -25,6 +25,5 @@ def BlockFriends() -> None:
 		'type': 2
 	}
 	for friend in friends:
-		r = requests.put(f"https://discord.com/api/v8/users/@me/relationships/{friend['id']}", headers = headers_account, json = payload)
-		# console.debug(r.text)
+		q.put((requests.put, f"https://discord.com/api/v8/users/@me/relationships/{friend['id']}", headers_account, payload))
 		console.log(f'Blocked → {friend["name"]}')

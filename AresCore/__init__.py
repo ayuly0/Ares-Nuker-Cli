@@ -7,5 +7,6 @@ from .users import BanAll, SendMessage
 from .webhooks import CreateWebhooks, WebhooksSend
 from .get_admin import GetAdmin
 from .get_all_guilds import GetAllGuilds
-from .create_invite import CreateInvite, BotInvite, GetBotUsername
+from .create_invite import CreateInvite, BotInvite, GetUsername
 from .friends import BlockFriends
+from .user_settings import SetWorstSettings

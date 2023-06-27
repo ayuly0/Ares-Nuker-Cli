@@ -3,11 +3,12 @@ sys.path.append('../')
 
 import global_vars
 
-def CheckToken() -> bool:
+def CheckToken(token, type) -> bool:
 	if global_vars.headers == None:
 		print('[≫] Please set the token bot.')
 		return
-	req = requests.get('https://discord.com/api/v9/users/@me', headers = global_vars.headers)
+	headers = {'authorization':"Bot " + token if type == 'bot' else '' + token, 'content-type': 'application/json'}
+	req = requests.get('https://discord.com/api/v9/users/@me', headers = headers)
 	if req.status_code == 200:
 		return True
 	elif req.status_code == 401:
