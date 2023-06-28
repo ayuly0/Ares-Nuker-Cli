@@ -1,0 +1,1 @@
+pyinstaller --noconfirm --onefile --console --icon=NONE --name "builder" --upx-dir "./upx-4.0.2-win64"  "./builder.py"
