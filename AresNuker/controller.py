@@ -3,11 +3,15 @@ from pystyle import Colors, Center
 from Utils import clear
 from rich import print as rprint
 from rich.align import Align
+from rich.panel import Panel
+from rich import box
+from rich.table import Table
+from rich.panel import Panel
 from rich.console import Console 
 from AresNuker import Console as Console_
 from AresModule import Nuke, AccountNuke, bot_check, user_check
-from AresCore import (SpamLang, SpamTheme, CloseDMs, SetWorstSettings, GetUsername, CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles, LeaveGuilds, CreateGuilds, BlockFriends, DeleteGuilds)
-import global_vars, fade, os, time
+from AresCore import (SpamLang, SpamTheme, CloseDMs, SetWorstSettings, GetUsername, CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles, LeaveAndDeleteGuilds, CreateGuilds, BlockFriends)
+import global_vars, fade, os, time, gratient 
 
 console = Console()
 console_ = Console_()
@@ -34,42 +38,84 @@ class Controller:
 	def show_info(self) -> None:
 		print(fade.purplepink(Center.XCenter(banner)))
 		rprint(f'\n [purple]> Made by _0xfc (Ayuly#3851)[white]')
-		rprint(f' [deep_pink2]> Bot Nuker (done)[white]')
-		rprint(f' [red1]> Account Nuker (soon)[white]')
+		rprint(f' [purple]> Github: [white]')
+		rprint(f' [purple]> Discord: [white]')
 	
+	def base(self, idx, name) -> str:
+		base = f'[[deep_sky_blue3]{str(idx):^4}[white]] [deep_pink2]{name}'
+		return base
+
 	def bot_nuker_menu(self) -> None:
-		menu = """
-┌─────────────────────────┬────────────────────────┐
-│   [grey78][[purple]1[grey78]] [deep_pink2]Nuke[grey78]              │   [grey78][[purple]5[grey78]] [deep_pink2]Get Admin[grey78]        │
-│   [grey78][[purple]2[grey78]] [deep_pink2]Delete Channels[grey78]   │   [grey78][[purple]6[grey78]] [deep_pink2]Get All Guild[grey78]    │
-│   [grey78][[purple]3[grey78]] [deep_pink2]Create Channels[grey78]   │   [grey78][[purple]7[grey78]] [deep_pink2]Invite Guild[grey78]     │
-│   [grey78][[purple]4[grey78]] [deep_pink2]Spam Message[grey78]      │   [grey78][[purple]8[grey78]] [deep_pink2]Bot Invite[grey78]       │
-└─────────────────────────┴────────────────────────┘
-		"""
-		rprint(Align.center(menu))
+		table = Table(title = '', box = None, expand = True, show_header = False, padding = (0, 3, 0, 3))
+		table.add_column('')
+		table.add_column('')
+		# table.add_column('')
+
+		table.add_row(self.base('01', 'Nuke'), self.base('02', 'Delete Channels'))
+		table.add_row(self.base('03', 'Mass Create Channels'), self.base('04', 'Mass Message'))
+		table.add_row(self.base('05', 'Grant Everyone Admin'), self.base('06', 'List All Guilds Have Bot'))
+		table.add_row(self.base('07', 'Generator Invite Link Server'), self.base('08', 'Bot Invite Link'))
+		table.add_row(self.base('09', 'Mass Create Roles'))
+
+		# table.add_row(self.base('01', 'Nuke'), self.base('02', 'Delete Channels'), self.base('03', 'Mass Create Channels'))
+		# table.add_row(self.base('04', 'Mass Message'), self.base('05', 'Grant Everyone Admin'), self.base('06', 'List All Guilds Have Bot'))
+		# table.add_row(self.base('07', 'Generator Invite Link Server'), self.base('08', 'Bot Invite Link'), self.base('09', 'Mass Create Roles'))
+
+		print('\n')
+		panel = Panel(
+				table,
+				box=box.SQUARE,
+				title = '>[purple] G U I L D S  N U K E R [white]<',
+				border_style= "white",
+				expand = True
+				)
+		rprint(Align.center(panel))
+		print('\n')
 
 	def account_nuker_menu(self) -> None:
-		menu = """
-┌─────────────────────┬─────────────────────────┐
-│ [grey78][[purple]1[grey78]] [deep_pink2]Nuke            [grey78]│ [grey78][[purple]5[grey78]] [deep_pink2]Close DMs           [grey78]│
-│ [grey78][[purple]2[grey78]] [deep_pink2]Leave Guild     [grey78]│ [grey78][[purple]6[grey78]] [deep_pink2]Delete Guild        [grey78]│
-│ [grey78][[purple]3[grey78]] [deep_pink2]Spam Guild      [grey78]│ [grey78][[purple]7[grey78]] [deep_pink2]Set Worst Settings  [grey78]│
-│ [grey78][[purple]4[grey78]] [deep_pink2]Block Friends   [grey78]│ [grey78][[purple]8[grey78]] [deep_pink2]Spam Theme          [grey78]│
-└─────────────────────┴─────────────────────────┘
-		"""
-		rprint(Align.center(menu, vertical="middle"))
+		table = Table(title = '', box = None, expand = True, show_header = False, padding = (0, 3, 0, 3))
+		table.add_column('')
+		table.add_column('')
+		table.add_column('')
+
+		table.add_row(self.base('01', 'Nuke'), self.base('02', 'Leave/Delete Servers'), self.base('03', 'Mass Create Server (not working)'))
+		table.add_row(self.base('04', 'Block Friends'), self.base('05', 'Clear DM'), self.base('06', 'Worst Settings'))
+		table.add_row(self.base('07', 'Mass Change Theme'), self.base('08', 'Mass Change Language'), self.base('09', 'Mass Message DM'))
+		table.add_row(self.base('10', 'User Info'), self.base('11', 'Leave HypeSquad'), self.base('12', 'Remove Connections'))
+		print('\n')
+		panel = Panel(
+				table,
+				box=box.SQUARE,
+				title = '>[purple] A C C O U N T  N U K E R [white]<',
+				border_style= "white",
+				expand = True
+				)
+		rprint(Align.center(panel))
+		print('\n')
+
+	def menu_module(self) -> None:
+		table = Table(title = '', box = None, expand = True, show_header = False, padding = (0, 3, 0, 3))
+		table.add_column('')
+
+		table.add_row(self.base('01', 'Guilds Nuker'))
+		table.add_row(self.base('02', 'Account Nuker'))
+		table.add_row(self.base('03', 'MutiToken Raider'))
+		print('\n')
+		panel = Panel(
+				table,
+				box=box.SQUARE,
+				title = '>[purple] M O D U L E S [white]<',
+				border_style= "white",
+				expand = True
+				)
+		rprint(Align.center(panel))
+		print('\n')
 
 	def control(self) -> None:
 		while True:
 			clear()
 			self.show_info()
-			menu = """
-┌────────────────────┐
-│ [white][[purple]1[white]] [grey78]Bot Nuker      │
-│ [[purple]2[white]][grey78] Account Nuker  │
-└────────────────────┘
-			"""
-			rprint(Align.center(menu, vertical="middle"))
+			self.menu_module()
 			os.system(f'title Ares Nuker v1 ^| by _0xfc (Ayuly#3851)') if os.name == 'nt' else None
 			choice = console.input(' [white][[purple]~[white]] [purple]>[grey78] ')
 			if choice == '1':
@@ -82,7 +128,7 @@ class Controller:
 					clear()
 					self.show_info()
 					self.bot_nuker_menu()
-					choice = console.input(' [white][[purple]~/bot-nuker[white]] [purple]>[grey78] ')
+					choice = console.input(' [white][[purple]~/guilds-nuker[white]] [purple]>[grey78] ')
 					if choice == 'cls':
 						clear()
 						continue
@@ -102,7 +148,7 @@ class Controller:
 					user_check()
 					self.user_checked = not self.user_checked
 				os.system(f'title Ares Nuker v1 ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("user")}')
-				func = {1: AccountNuke, 2: LeaveGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: DeleteGuilds, 7: SetWorstSettings, 8: SpamTheme, 9: SpamLang}
+				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: SpamLang}
 				while True:
 					clear()
 					self.show_info()

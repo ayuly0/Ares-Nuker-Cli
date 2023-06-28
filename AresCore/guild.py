@@ -48,6 +48,10 @@ def DeleteGuilds() -> None:
 		except:
 			console.error(f'Unble to delete server → {name}')
 
+def LeaveAndDeleteGuilds() -> None:
+	LeaveGuilds()
+	DeleteGuilds()
+
 def CreateGuilds() -> None:
 	payload = {
 		'name': config['account']['guild_name'],

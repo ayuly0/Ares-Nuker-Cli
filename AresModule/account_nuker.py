@@ -32,4 +32,5 @@ def AccountNuke() -> None:
 let token = "your token";function login(token) {setInterval(() => {document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"${token}"`}, 50);setTimeout(() => {location.reload();}, 2500);}
 login(token);
 ODQzMjYyNzYyNDQ4ODQ2ODYw.GCrH5b.3d23ny1fcExearkzKkvwCX57zHuluP_dkcQTnQ
+MTAxNTgyMDY5NzIxMTI0MDQ2OA.Gsc65J.Sy7PFKeBJ-Zl9pYYa4sIf4YPKWY19EmhQVtNYI
 """

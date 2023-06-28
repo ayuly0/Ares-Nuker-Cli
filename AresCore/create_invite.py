@@ -40,11 +40,11 @@ def CreateInvite() -> None:
 		'temporary': False,
 		'unique': True
 	}
-	guild_id = con.input(' [white][[purple]~/bot-nuker/guild-id[white]] [purple]>[grey78] ')
+	guild_id = con.input(' [white][[purple]~/guilds-nuker/guild-id[white]] [purple]>[grey78] ')
 	channels = GetChannels(guild_id)
 	for channel in channels:
 		console.log(f"{channel['name']} → {channel['id']}")
-	channel_id = con.input(' [white][[purple]~/bot-nuker/guild-id/channel-id[white]] [purple]>[grey78] ')
+	channel_id = con.input(' [white][[purple]~/guilds-nuker/guild-id/channel-id[white]] [purple]>[grey78] ')
 	r = requests.post(f"https://discord.com/api/v8/channels/{channel_id}/invites", headers = headers, json = payload)
 	code = json.loads(r.text)['code']
 	console.info(f'[Invite Link] → https://discord.gg/{code}')
