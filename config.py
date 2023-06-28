@@ -50,7 +50,7 @@ def CreateConfig():
 
 	with open('config.ini', 'w') as configfile:
 		config.write(configfile)
-	console.info('Created config.ini, please config in config.ini file.')
+	console.log('Created config.ini, please config in config.ini file.')
 	input()
 	os._exit(0)
 

@@ -23,12 +23,14 @@ def bot_check() -> None:
 		rprint('[chartreuse3] > Token bot is vaild [white]')
 	else:
 		rprint('[red3] > Token bot is invaild [white]')
+		input()
 		os._exit(0)
 
 	if IsGuild():
 		rprint('[chartreuse3] > ID Guild is vaild [white]')
 	else:
 		rprint('[red3] > ID Guild is invaild [white]')
+		input()
 		GetAllGuilds()
 		os._exit(0)
 

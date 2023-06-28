@@ -15,6 +15,7 @@ def user_check() -> None:
 		rprint('[chartreuse3] > Token user is vaild [white]')
 	else:
 		rprint('[red3] > Token user is invaild [white]')
+		input()
 		os._exit(0)
 
 
