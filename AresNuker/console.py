@@ -1,6 +1,6 @@
 from pystyle import Colorate, Colors
 from colorama import Fore, Back, Style
-import datetime, os
+import datetime, os, fade
 
 class Console:
 
@@ -13,20 +13,20 @@ class Console:
 		return cols
 
 	def log(self, content) -> None:
-		print(f' [{Colorate.Horizontal(Colors.purple_to_red, self.time())}] [{Colors.purple}>>{Colors.white}] {content}')
+		print(f' [ {Colorate.Horizontal(Colors.purple_to_red, self.time())} ] [ {Colors.purple}>>{Colors.white} ] {content}')
 
 	def info(self, content) -> None:
 		cols = self.ter_size()
-		print(f' [{Colorate.Horizontal(Colors.purple_to_red, self.time())}] [{Colors.purple}>>{Colors.white}] [{Back.BLUE}INFO{Style.RESET_ALL}{Colors.white}] {content} ')
+		print(f' [ {Colorate.Horizontal(Colors.purple_to_red, self.time())} ] [ {Colors.purple}>>{Colors.white} ] [ {Fore.CYAN}INFO{Style.RESET_ALL}{Colors.white} ] {content} ')
 
 	def debug(self, content) -> None:
 		cols = self.ter_size()
-		print(f' [{Colorate.Horizontal(Colors.purple_to_red, self.time())}] [{Colors.purple}>>{Colors.white}] [{Back.BLUE}DEBUG{Style.RESET_ALL}{Colors.white}] {content}')
+		print(f' [ {Colorate.Horizontal(Colors.purple_to_red, self.time())} ] [ {Colors.purple}>>{Colors.white} ] [ {Fore.CYAN}DEBUG{Style.RESET_ALL}{Colors.white} ] {content}')
 
 	def warning(self, content) -> None:
 		cols = self.ter_size()
-		print(f' [{Colorate.Horizontal(Colors.purple_to_red, self.time())}] [{Colors.purple}>>{Colors.white}] [{Back.YELLOW}WARRNING{Style.RESET_ALL}{Colors.white}] {Fore.YELLOW+content+Colors.white}')		
+		print(f' [ {Colorate.Horizontal(Colors.purple_to_red, self.time())} ] [ {Colors.purple}>>{Colors.white} ] [ {Fore.YELLOW}WARRNING{Style.RESET_ALL}{Colors.white} ] {Fore.YELLOW+content+Colors.white}')		
 
 	def error(self, content):
 		cols = self.ter_size()
-		print(f' [{Colorate.Horizontal(Colors.purple_to_red, self.time())}] [{Colors.purple}>>{Colors.white}] [{Back.RED}ERROR{Style.RESET_ALL}{Colors.white}] {Fore.RED+content+Fore.WHITE:<{cols-60}}')
+		print(f' [ {Colorate.Horizontal(Colors.purple_to_red, self.time())} ] [ {Colors.purple}>>{Colors.white} ] [ {Fore.RED}ERROR{Style.RESET_ALL}{Colors.white} ] {Fore.RED+content+Fore.WHITE}')
