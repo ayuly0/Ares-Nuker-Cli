@@ -40,4 +40,4 @@ headers_account = random.choice(heads)
 headers = {'authorization': "Bot " + config['bot']['token'], 'content-type': 'application/json'} if config['bot']['token'] != 'None' else None
 # headers_account = ({'authorization': config['account']['token']}) if config['account']['token'] != 'None' else None
 headers_account['authorization'] = config['account']['token']
-guild_id = config['discord']['guild_id']
+guild_id = 0

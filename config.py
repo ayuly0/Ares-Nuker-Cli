@@ -13,7 +13,6 @@ def CreateConfig():
 	console.error('config.ini not found')
 	config.add_section('bot')
 	config.set('bot', 'token', 'None')
-	config.set('bot', 'version', '1')
 
 	config.add_section('nuke')
 	config.set('nuke', 'guild_name', 'Ares Nuker On Top')

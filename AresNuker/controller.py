@@ -9,11 +9,24 @@ from rich import box
 from rich.console import Console 
 from AresNuker import Console as Console_
 from AresModule import Nuke, AccountNuke, bot_check, user_check
-from AresCore import (IsGuild, SpamLang, SpamTheme, CloseDMs, SetWorstSettings, GetUsername, CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles, LeaveAndDeleteGuilds, CreateGuilds, BlockFriends)
+from AresCore import (
+	MassMessageDM, IsGuild, 
+	SpamLang, SpamTheme, 
+	CloseDMs, SetWorstSettings, 
+	GetUsername, CreateChannels, 
+	DeleteChannels, BanAll, 
+	SendMessage, GetAdmin, 
+	GetAllGuilds, CreateInvite, 
+	BotInvite, CreateRoles, 
+	LeaveAndDeleteGuilds, CreateGuilds, 
+	BlockFriends
+	)
 import global_vars, fade, os, time 
 
 console = Console()
 console_ = Console_()
+
+version = 1
 
 banner = f"""
  ▄▄▄       ██▀███  ▓█████   ██████     ███▄    █  █    ██  ██ ▄█▀▓█████  ██▀███  
@@ -25,7 +38,7 @@ banner = f"""
   ▒   ▒▒ ░  ░▒ ░ ▒░ ░ ░  ░░ ░▒  ░ ░   ░ ░░   ░ ▒░░░▒░ ░ ░ ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
   ░   ▒     ░░   ░    ░   ░  ░  ░        ░   ░ ░  ░░░ ░ ░ ░ ░░ ░    ░     ░░   ░ 
       ░  ░   ░        ░  ░      ░              ░    ░     ░  ░      ░  ░   ░     
-                                                       A r e s  N u k e r  V{global_vars.config['bot']['version']}
+                                                       A r e s  N u k e r  V{version}
 """
 
 class Controller:
@@ -41,7 +54,7 @@ class Controller:
 		rprint(f' [deep_sky_blue3]> Discord: dsc.gg/aresnuker[white]')
 	
 	def base(self, idx, name) -> str:
-		base = f'[white][[deep_sky_blue3]{str(idx):^4}[white]] [deep_pink2]{name}'
+		base = f'[grey78][[deep_sky_blue3]{str(idx):^4}[grey78]] [deep_pink2]{name}'
 		return base
 
 	def bot_nuker_menu(self) -> None:
@@ -59,8 +72,8 @@ class Controller:
 		panel = Panel(
 				table,
 				box=box.SQUARE,
-				title = '>[purple] G U I L D S  N U K E R [white]<',
-				border_style= "white",
+				title = '>[purple] G U I L D S  N U K E R [grey78]<',
+				border_style= "grey78",
 				expand = True
 				)
 		rprint(Align.center(panel))
@@ -77,12 +90,13 @@ class Controller:
 		table.add_row(self.base('07', 'Mass Change Theme'), self.base('08', 'Mass Change Language'))
 		table.add_row(self.base('09', 'Mass Message DM'), self.base('10', 'User Info'))
 		table.add_row(self.base('11', 'Leave HypeSquad'), self.base('12', 'Remove Connections'))
+		table.add_row(self.base('13', 'Token Checker'), self.base('14', 'Token Login'))
 		print('\n')
 		panel = Panel(
 				table,
 				box=box.SQUARE,
-				title = '>[purple] A C C O U N T  N U K E R [white]<',
-				border_style= "white",
+				title = '>[purple] A C C O U N T  N U K E R [grey78]<',
+				border_style= "grey78",
 				expand = True
 				)
 		rprint(Align.center(panel))
@@ -99,8 +113,8 @@ class Controller:
 		panel = Panel(
 				table,
 				box=box.SQUARE,
-				title = '>[purple] M O D U L E S [white]<',
-				border_style= "white",
+				title = '>[purple] M O D U L E S [grey78]<',
+				border_style= "grey78",
 				expand = True
 				)
 		rprint(Align.center(panel))
@@ -132,14 +146,14 @@ class Controller:
 			clear()
 			self.show_info()
 			self.menu_module()
-			os.system(f'title Ares Nuker v1 ^| by _0xfc (Ayuly#3851)') if os.name == 'nt' else None
+			os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851)') if os.name == 'nt' else None
 			choice = console.input(' [white][[purple]~[white]] [purple]>[grey78] ')
 			if choice == '1':
 				if not self.bot_checked:
 					bot_check()
 					self.set_guild_id()
 					self.bot_checked = not self.bot_checked
-				os.system(f'title Ares Nuker v1 ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("bot")}')
+				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("bot")}')
 				func = {1: Nuke, 2: DeleteChannels, 3: CreateChannels, 4: SendMessage, 5: GetAdmin, 6: GetAllGuilds, 7: CreateInvite, 8: BotInvite, 9: CreateRoles, 90: self.set_guild_id}
 				while True:
 					clear()
@@ -164,8 +178,8 @@ class Controller:
 				if not self.user_checked:
 					user_check()
 					self.user_checked = not self.user_checked
-				os.system(f'title Ares Nuker v1 ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("user")}')
-				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: SpamLang}
+				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("user")}')
+				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: MassMessageDM}
 				while True:
 					clear()
 					self.show_info()
@@ -182,9 +196,9 @@ class Controller:
 						func_ = func[int(choice)]
 						func_()
 					except Exception as e:
-						# raise e
-						console_.warning('Not Found')
-						time.sleep(1)
+						raise e
+						# console_.warning('Not Found')
+						# time.sleep(1)
 			elif choice == 'exit':
 				os._exit(0)
 			else:
