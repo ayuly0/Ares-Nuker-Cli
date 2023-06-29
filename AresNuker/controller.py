@@ -4,14 +4,13 @@ from Utils import clear
 from rich import print as rprint
 from rich.align import Align
 from rich.panel import Panel
-from rich import box
 from rich.table import Table
-from rich.panel import Panel
+from rich import box
 from rich.console import Console 
 from AresNuker import Console as Console_
 from AresModule import Nuke, AccountNuke, bot_check, user_check
-from AresCore import (SpamLang, SpamTheme, CloseDMs, SetWorstSettings, GetUsername, CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles, LeaveAndDeleteGuilds, CreateGuilds, BlockFriends)
-import global_vars, fade, os, time, gratient 
+from AresCore import (IsGuild, SpamLang, SpamTheme, CloseDMs, SetWorstSettings, GetUsername, CreateChannels, DeleteChannels, BanAll, SendMessage, GetAdmin, GetAllGuilds, CreateInvite, BotInvite, CreateRoles, LeaveAndDeleteGuilds, CreateGuilds, BlockFriends)
+import global_vars, fade, os, time 
 
 console = Console()
 console_ = Console_()
@@ -38,28 +37,23 @@ class Controller:
 	def show_info(self) -> None:
 		print(fade.purplepink(Center.XCenter(banner)))
 		rprint(f'\n [purple]> Made by _0xfc (Ayuly#3851)[white]')
-		rprint(f' [purple]> Github: [white]')
-		rprint(f' [purple]> Discord: [white]')
+		rprint(f' [grey30]> Github: [white]')
+		rprint(f' [deep_sky_blue3]> Discord: dsc.gg/aresnuker[white]')
 	
 	def base(self, idx, name) -> str:
-		base = f'[[deep_sky_blue3]{str(idx):^4}[white]] [deep_pink2]{name}'
+		base = f'[white][[deep_sky_blue3]{str(idx):^4}[white]] [deep_pink2]{name}'
 		return base
 
 	def bot_nuker_menu(self) -> None:
-		table = Table(title = '', box = None, expand = True, show_header = False, padding = (0, 3, 0, 3))
+		table = Table(title = '', box = None, expand = True, show_header = False)
 		table.add_column('')
 		table.add_column('')
-		# table.add_column('')
 
-		table.add_row(self.base('01', 'Nuke'), self.base('02', 'Delete Channels'))
+		table.add_row(self.base('01', 'Nuke'), self.base('02', 'Mass Delete Channels'))
 		table.add_row(self.base('03', 'Mass Create Channels'), self.base('04', 'Mass Message'))
-		table.add_row(self.base('05', 'Grant Everyone Admin'), self.base('06', 'List All Guilds Have Bot'))
-		table.add_row(self.base('07', 'Generator Invite Link Server'), self.base('08', 'Bot Invite Link'))
+		table.add_row(self.base('05', 'Grant Everyone Admin'), self.base('06', 'Available Guilds'))
+		table.add_row(self.base('07', 'Create Invite Link Guild'), self.base('08', 'Bot Invite Link'))
 		table.add_row(self.base('09', 'Mass Create Roles'))
-
-		# table.add_row(self.base('01', 'Nuke'), self.base('02', 'Delete Channels'), self.base('03', 'Mass Create Channels'))
-		# table.add_row(self.base('04', 'Mass Message'), self.base('05', 'Grant Everyone Admin'), self.base('06', 'List All Guilds Have Bot'))
-		# table.add_row(self.base('07', 'Generator Invite Link Server'), self.base('08', 'Bot Invite Link'), self.base('09', 'Mass Create Roles'))
 
 		print('\n')
 		panel = Panel(
@@ -73,15 +67,16 @@ class Controller:
 		print('\n')
 
 	def account_nuker_menu(self) -> None:
-		table = Table(title = '', box = None, expand = True, show_header = False, padding = (0, 3, 0, 3))
-		table.add_column('')
+		table = Table(title = '', box = None, expand = True, show_header = False)
 		table.add_column('')
 		table.add_column('')
 
-		table.add_row(self.base('01', 'Nuke'), self.base('02', 'Leave/Delete Servers'), self.base('03', 'Mass Create Server (not working)'))
-		table.add_row(self.base('04', 'Block Friends'), self.base('05', 'Clear DM'), self.base('06', 'Worst Settings'))
-		table.add_row(self.base('07', 'Mass Change Theme'), self.base('08', 'Mass Change Language'), self.base('09', 'Mass Message DM'))
-		table.add_row(self.base('10', 'User Info'), self.base('11', 'Leave HypeSquad'), self.base('12', 'Remove Connections'))
+		table.add_row(self.base('01', 'Nuke'), self.base('02', 'Leave/Delete Servers'))
+		table.add_row(self.base('03', 'Mass Create Server (not working)'), self.base('04', 'Block Friends'))
+		table.add_row(self.base('05', 'Clear DM'), self.base('06', 'Worst Settings'))
+		table.add_row(self.base('07', 'Mass Change Theme'), self.base('08', 'Mass Change Language'))
+		table.add_row(self.base('09', 'Mass Message DM'), self.base('10', 'User Info'))
+		table.add_row(self.base('11', 'Leave HypeSquad'), self.base('12', 'Remove Connections'))
 		print('\n')
 		panel = Panel(
 				table,
@@ -111,6 +106,27 @@ class Controller:
 		rprint(Align.center(panel))
 		print('\n')
 
+	def set_guild_id(self):
+		while True:
+			clear()
+			self.show_info()
+			rprint('\n\n[purple] > Enter Guild ID [white]')
+			guild_id = console.input("\n [white][[purple]~/guild-id[white]] [purple]>[grey78] ")
+			if guild_id == 'back':
+				break
+			elif guild_id == 'exit':
+				os._exit(0)
+			rprint('\n[purple] > Checking Guild ID [white]')
+			if IsGuild(guild_id):
+				rprint('[chartreuse3] > Guild ID is vaild [white]')
+				global_vars.guild_id = guild_id
+				break
+			else:
+				rprint('[red3] > Guild ID is invaild [white]')
+				rprint('\n[purple] > Available Guilds [white]\n')
+				GetAllGuilds()
+				continue
+
 	def control(self) -> None:
 		while True:
 			clear()
@@ -121,9 +137,10 @@ class Controller:
 			if choice == '1':
 				if not self.bot_checked:
 					bot_check()
+					self.set_guild_id()
 					self.bot_checked = not self.bot_checked
 				os.system(f'title Ares Nuker v1 ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("bot")}')
-				func = {1: Nuke, 2: DeleteChannels, 3: CreateChannels, 4: SendMessage, 5: GetAdmin, 6: GetAllGuilds, 7: CreateInvite, 8: BotInvite, 9: CreateRoles}
+				func = {1: Nuke, 2: DeleteChannels, 3: CreateChannels, 4: SendMessage, 5: GetAdmin, 6: GetAllGuilds, 7: CreateInvite, 8: BotInvite, 9: CreateRoles, 90: self.set_guild_id}
 				while True:
 					clear()
 					self.show_info()
@@ -165,9 +182,9 @@ class Controller:
 						func_ = func[int(choice)]
 						func_()
 					except Exception as e:
-						raise e
-						# console_.warning('Not Found')
-						# time.sleep(1)
+						# raise e
+						console_.warning('Not Found')
+						time.sleep(1)
 			elif choice == 'exit':
 				os._exit(0)
 			else:

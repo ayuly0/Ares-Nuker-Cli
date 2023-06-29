@@ -9,10 +9,9 @@ q = GetQ()
 
 headers = global_vars.headers
 config = global_vars.config
-guild_id = global_vars.guild_id
 
 def CreateWebhooks():
-	channels = GetChannels(guild_id)
+	channels = GetChannels(global_vars.guild_id)
 	webhook_name = config['nuke']['webhook_name']
 	payload = {
 		'name': webhook_name,
@@ -26,7 +25,7 @@ def CreateWebhooks():
 			console.error(f'Unble to create webhook {webhook_name}')
 
 def GetWebhooks():
-	req = requests.get(f'https://discord.com/api/v8/guilds/{guild_id}/webhooks', headers = headers)
+	req = requests.get(f'https://discord.com/api/v8/guilds/{global_vars.guild_id}/webhooks', headers = headers)
 	webhooks = json.loads(req.text)
 	webhooks_ = []
 	for webhook in webhooks:

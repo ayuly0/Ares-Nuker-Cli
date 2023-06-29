@@ -38,7 +38,6 @@ def CreateConfig():
 
 	config.add_section('discord')
 	config.set('discord', 'user_id', '0')
-	config.set('discord', 'guild_id', '0')
 	config.set('discord', 'white_users_id', '[]')
 	config.set('discord', 'white_guilds_id', '[]')
 

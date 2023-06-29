@@ -10,7 +10,6 @@ headers = global_vars.headers
 config = global_vars.config
 channel_name = config['nuke']['channel_name']
 amount_channel = int(config['nuke']['amount_channel'])
-guild_id = global_vars.guild_id
 
 def CreateChannels() -> None:
 	payload = {
@@ -21,7 +20,7 @@ def CreateChannels() -> None:
 
 	for i in range(amount_channel):
 		try:
-			q.put((requests.post, f'https://discord.com/api/v8/guilds/{guild_id}/channels', headers, payload))
+			q.put((requests.post, f'https://discord.com/api/v8/guilds/{global_vars.guild_id}/channels', headers, payload))
 			console.log(f'Created channel {channel_name}')
 		except:
 			console.error(f'Unble to create channel {channel_name}')
@@ -38,7 +37,7 @@ def GetChannels(server_id):
 
 
 def DeleteChannels() -> None:
-	channels = GetChannels(guild_id)
+	channels = GetChannels(global_vars.guild_id)
 	for channel in channels:
 		try:
 			q.put((requests.delete, f'https://discord.com/api/v8/channels/{channel["id"]}', headers, None))

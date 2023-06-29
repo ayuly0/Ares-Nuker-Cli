@@ -6,7 +6,6 @@ import time
 console = Console()
 headers = global_vars.headers
 headers_account = global_vars.headers_account
-guild_id = global_vars.guild_id
 
 def _GetAllGuilds() -> list:
 	r = requests.get('https://discord.com/api/v8/users/@me/guilds', headers = headers)

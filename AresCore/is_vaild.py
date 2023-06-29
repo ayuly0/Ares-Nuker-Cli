@@ -16,8 +16,8 @@ def CheckToken(token, type) -> bool:
 	elif req.status_code == 401:
 		return False
 
-def IsGuild() -> bool:
-	req = requests.get(f"https://discord.com/api/v9/guilds/{global_vars.config['discord']['guild_id']}", headers = global_vars.headers)
+def IsGuild(id) -> bool:
+	req = requests.get(f"https://discord.com/api/v9/guilds/{id}", headers = global_vars.headers)
 	if req.status_code == 200:
 		return True
 	elif req.status_code == 404:

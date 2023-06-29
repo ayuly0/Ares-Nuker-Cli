@@ -31,17 +31,13 @@ def BotInvite() -> None:
 	input()
 
 def CreateInvite() -> None:
-	guilds = _GetAllGuilds()
-	for guild in guilds:
-		console.log(f'{guild["name"]} → {guild["id"]}')
 	payload = {
 		'max_age': 2592000,
 		'max_uses': 100,
 		'temporary': False,
 		'unique': True
 	}
-	guild_id = con.input(' [white][[purple]~/guilds-nuker/guild-id[white]] [purple]>[grey78] ')
-	channels = GetChannels(guild_id)
+	channels = GetChannels(global_vars.guild_id)
 	for channel in channels:
 		console.log(f"{channel['name']} → {channel['id']}")
 	channel_id = con.input(' [white][[purple]~/guilds-nuker/guild-id/channel-id[white]] [purple]>[grey78] ')

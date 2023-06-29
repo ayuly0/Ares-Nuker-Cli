@@ -3,3 +3,4 @@ colorama
 rich
 requests
 fade
+rich
