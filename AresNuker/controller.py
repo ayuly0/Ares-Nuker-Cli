@@ -19,7 +19,8 @@ from AresCore import (
 	GetAllGuilds, CreateInvite, 
 	BotInvite, CreateRoles, 
 	LeaveAndDeleteGuilds, CreateGuilds, 
-	BlockFriends
+	BlockFriends, LeaveHypesquad,
+	TokenChecker
 	)
 import global_vars, fade, os, time 
 
@@ -150,7 +151,8 @@ class Controller:
 			choice = console.input(' [white][[purple]~[white]] [purple]>[grey78] ')
 			if choice == '1':
 				if not self.bot_checked:
-					bot_check()
+					if not bot_check() :
+						continue
 					self.set_guild_id()
 					self.bot_checked = not self.bot_checked
 				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("bot")}')
@@ -176,10 +178,11 @@ class Controller:
 
 			elif choice == '2':
 				if not self.user_checked:
-					user_check()
+					if not user_check():
+						continue
 					self.user_checked = not self.user_checked
 				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("user")}')
-				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: MassMessageDM}
+				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: MassMessageDM, 11: LeaveHypesquad, 13: TokenChecker}
 				while True:
 					clear()
 					self.show_info()

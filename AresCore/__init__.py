@@ -11,3 +11,5 @@ from .create_invite import CreateInvite, BotInvite, GetUsername
 from .friends import BlockFriends
 from .user_settings import SetWorstSettings, SpamTheme, SpamLang
 from .dms import CloseDMs, MassMessageDM
+from .leave_hypesquad import LeaveHypesquad
+from .token_checker import TokenChecker

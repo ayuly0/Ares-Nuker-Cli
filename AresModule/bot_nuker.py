@@ -14,16 +14,17 @@ StartRequestMaker()
 config = global_vars.config
 token = config['bot']['token']
 
-def bot_check() -> None:
+def bot_check() -> bool:
 	clear()
 
 	rprint('[purple] > Checking Token Bot [white]')
 	if CheckToken(token, 'bot'):
 		rprint('[chartreuse3] > Token bot is vaild [white]')
+		return True
 	else:
 		rprint('[red3] > Token bot is invaild [white]')
 		input()
-		os._exit(0)
+		return False
 
 
 def Nuke() -> None:

@@ -1,4 +1,4 @@
-import global_vars, requests, json,
+import global_vars, requests, json
 from AresNuker import Console
 
 console = Console()
