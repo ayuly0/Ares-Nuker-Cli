@@ -20,7 +20,7 @@ from AresCore import (
 	BotInvite, CreateRoles, 
 	LeaveAndDeleteGuilds, CreateGuilds, 
 	BlockFriends, LeaveHypesquad,
-	TokenChecker
+	TokenChecker, User
 	)
 import global_vars, fade, os, time 
 
@@ -46,6 +46,7 @@ class Controller:
 	def __init__(self) -> None:
 		self.bot_checked = False
 		self.user_checked = False
+		self.set_guild_id_ed = False
 		clear()
 
 	def show_info(self) -> None:
@@ -135,6 +136,7 @@ class Controller:
 			if IsGuild(guild_id):
 				rprint('[chartreuse3] > Guild ID is vaild [white]')
 				global_vars.guild_id = guild_id
+				self.set_guild_id_ed = True
 				break
 			else:
 				rprint('[red3] > Guild ID is invaild [white]')
@@ -153,7 +155,6 @@ class Controller:
 				if not self.bot_checked:
 					if not bot_check() :
 						continue
-					self.set_guild_id()
 					self.bot_checked = not self.bot_checked
 				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("bot")}')
 				func = {1: Nuke, 2: DeleteChannels, 3: CreateChannels, 4: SendMessage, 5: GetAdmin, 6: GetAllGuilds, 7: CreateInvite, 8: BotInvite, 9: CreateRoles, 90: self.set_guild_id}
@@ -169,6 +170,10 @@ class Controller:
 						break
 					elif choice == 'exit':
 						os._exit(0)
+					if not self.set_guild_id_ed and choice != '90':
+						rprint(' [purple]> Set the guild id use 90')
+						input()
+						continue
 					try:
 						func_ = func[int(choice)]
 						func_()
@@ -182,7 +187,7 @@ class Controller:
 						continue
 					self.user_checked = not self.user_checked
 				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("user")}')
-				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: MassMessageDM, 11: LeaveHypesquad, 13: TokenChecker}
+				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: MassMessageDM, 10: User, 11: LeaveHypesquad, 13: TokenChecker}
 				while True:
 					clear()
 					self.show_info()

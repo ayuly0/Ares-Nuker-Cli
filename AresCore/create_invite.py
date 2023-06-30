@@ -43,5 +43,9 @@ def CreateInvite() -> None:
 	channel_id = con.input(' [white][[purple]~/guilds-nuker/guild-id/channel-id[white]] [purple]>[grey78] ')
 	r = requests.post(f"https://discord.com/api/v8/channels/{channel_id}/invites", headers = headers, json = payload)
 	code = json.loads(r.text)['code']
+	if code == '10003':
+		console.error('Unknown Channel')
+		input()
+		return
 	console.info(f'[Invite Link] → https://discord.gg/{code}')
 	input()

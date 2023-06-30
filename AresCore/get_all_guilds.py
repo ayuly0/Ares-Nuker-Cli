@@ -24,12 +24,10 @@ def _GetAllGuildsUser():
 			guilds_.append({'name':guild['name'], 'id':guild['id'], 'owner': True if guild['owner'] == 'true' else False})
 		return guilds_
 	elif r.status_code == 429:
-		time.sleep(2)
+		time.sleep(3)
 		guilds = json.loads(r.text)
 		guilds_ = []
 		for guild in guilds:
-			console.debug(guild)
-			input()
 			guilds_.append({'name':guild['name'], 'id':guild['id'], 'owner': True if guild['owner'] == 'true' else False})
 		return guilds_
 	else:
