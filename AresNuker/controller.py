@@ -56,19 +56,25 @@ class Controller:
 		rprint(f' [deep_sky_blue3]> Discord: dsc.gg/aresnuker[white]')
 	
 	def base(self, idx, name) -> str:
-		base = f'[grey78][[deep_sky_blue3]{str(idx):^4}[grey78]] [deep_pink2]{name}'
+		base = f'[grey78]([deep_sky_blue3]{str(idx):^4}[grey78]) [deep_pink2]{name}'
 		return base
 
 	def bot_nuker_menu(self) -> None:
 		table = Table(title = '', box = None, expand = True, show_header = False)
 		table.add_column('')
 		table.add_column('')
-
-		table.add_row(self.base('01', 'Nuke'), self.base('02', 'Mass Delete Channels'))
-		table.add_row(self.base('03', 'Mass Create Channels'), self.base('04', 'Mass Message'))
-		table.add_row(self.base('05', 'Grant Everyone Admin'), self.base('06', 'Available Guilds'))
-		table.add_row(self.base('07', 'Create Invite Link Guild'), self.base('08', 'Bot Invite Link'))
-		table.add_row(self.base('09', 'Mass Create Roles'))
+		funcs = ['Nuke', 'Mass Delete Channels', 'Mass Create Channels', 'Mass Message', 'Grant Everyone Admin', 'Available Servers', 'Create Invite Link Guild', 'Bot Invite Link', 'Mass Create Roles']
+		funcs_zip = enumerate(zip(funcs[::2], funcs[1::2]))
+		count = 0
+		for items_ in funcs_zip:
+			index, items = items_
+			index = int(index)
+			item1, item2 = items
+			count += 1
+			table.add_row(self.base(f'0{index+count}' if index+count < 10 else index+count, item1), self.base(f'0{index+count+1}' if index+count+1 < 10 else index+count+1, item2))
+			
+		if len(funcs) % 2 != 0:
+			table.add_row(self.base(f'0{len(funcs)}' if len(funcs) < 10 else len(funcs) , funcs[-1]))
 
 		print('\n')
 		panel = Panel(
@@ -86,18 +92,51 @@ class Controller:
 		table.add_column('')
 		table.add_column('')
 
-		table.add_row(self.base('01', 'Nuke'), self.base('02', 'Leave/Delete Servers'))
-		table.add_row(self.base('03', 'Mass Create Server (not working)'), self.base('04', 'Block Friends'))
-		table.add_row(self.base('05', 'Clear DM'), self.base('06', 'Worst Settings'))
-		table.add_row(self.base('07', 'Mass Change Theme'), self.base('08', 'Mass Change Language'))
-		table.add_row(self.base('09', 'Mass Message DM'), self.base('10', 'User Info'))
-		table.add_row(self.base('11', 'Leave HypeSquad'), self.base('12', 'Remove Connections'))
-		table.add_row(self.base('13', 'Token Checker'), self.base('14', 'Token Login'))
+		funcs = ['Nuke', 'Leave/Delete Servers', 'Mass Crete Servers (not working)', 'Block Friends', 'Clear DM', 'Worst Settings', 'Mass Change Themes', 'Mass Change Language', 'Leave Hypesquad', 'Remove Connections']
+		funcs_zip = enumerate(zip(funcs[::2], funcs[1::2]))
+		count = 0
+		for items_ in funcs_zip:
+			index, items = items_
+			index = int(index)
+			item1, item2 = items
+			count += 1
+			table.add_row(self.base(f'0{index+count}' if index+count < 10 else index+count, item1), self.base(f'0{index+count+1}' if index+count+1 < 10 else index+count+1, item2))
+			
+		if len(funcs) % 2 != 0:
+			table.add_row(self.base(f'0{len(funcs)}' if len(funcs) < 10 else len(funcs) , funcs[-1]))
 		print('\n')
 		panel = Panel(
 				table,
 				box=box.SQUARE,
 				title = '>[purple] A C C O U N T  N U K E R [grey78]<',
+				border_style= "grey78",
+				expand = True
+				)
+		rprint(Align.center(panel))
+		print('\n')
+	
+	def mutitoken_raid_menu(self) -> None:
+		table = Table(title = '', box = None, expand = True, show_header = False)
+		table.add_column('')
+		table.add_column('')
+
+		funcs = ['Joiner', 'Leaver', 'Spammer', 'Accept Rules', 'Reactor', 'Robalini', 'Mass Friend', 'Change Bio', 'Change Display Names', 'Change Hypesquad', 'Fake Typing', 'Avatar Changer', 'DM Spammer', 'Token Checker', 'Token Login']
+		funcs_zip = enumerate(zip(funcs[::2], funcs[1::2]))
+		count = 0
+		for items_ in funcs_zip:
+			index, items = items_
+			index = int(index)
+			item1, item2 = items
+			count += 1
+			table.add_row(self.base(f'0{index+count}' if index+count < 10 else index+count, item1), self.base(f'0{index+count+1}' if index+count+1 < 10 else index+count+1, item2))
+			
+		if len(funcs) % 2 != 0:
+			table.add_row(self.base(f'0{len(funcs)}' if len(funcs) < 10 else len(funcs) , funcs[-1]))
+		print('\n')
+		panel = Panel(
+				table,
+				box=box.SQUARE,
+				title = '>[purple] M U T I  T O K E N  R A I D E R [grey78]<',
 				border_style= "grey78",
 				expand = True
 				)
@@ -186,8 +225,8 @@ class Controller:
 					if not user_check():
 						continue
 					self.user_checked = not self.user_checked
-				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("user")}')
-				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: MassMessageDM, 10: User, 11: LeaveHypesquad, 13: TokenChecker}
+				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| login as {GetUsername("user")}') if os.name == 'nt' else None
+				func = {1: AccountNuke, 2: LeaveAndDeleteGuilds, 3: CreateGuilds, 4: BlockFriends, 5: CloseDMs, 6: SetWorstSettings, 7: SpamTheme, 8: SpamLang, 9: MassMessageDM, 10: User, 11: LeaveHypesquad}
 				while True:
 					clear()
 					self.show_info()
@@ -207,6 +246,27 @@ class Controller:
 						raise e
 						# console_.warning('Not Found')
 						# time.sleep(1)
+			elif choice == '3':
+				os.system(f'title Ares Nuker ^| by _0xfc (Ayuly#3851) ^| Total Token: ') if os.name == 'nt' else None
+				func = {14: TokenChecker}
+				self.mutitoken_raid_menu()
+				while True:
+					clear()
+					self.show_info()
+					self.mutitoken_raid_menu()
+					choice = console.input(' [white][[purple]~/muti-token-raider[white]] [purple]>[grey78] ')
+					if choice == 'cls':
+						clear()
+						continue
+					elif choice == 'back':
+						break
+					elif choice == 'exit':
+						os._exit(0)
+					try:
+						func_ = func[int(choice)]
+						func_()
+					except Exception as e:
+						raise e
 			elif choice == 'exit':
 				os._exit(0)
 			else:
