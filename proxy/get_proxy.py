@@ -1,6 +1,5 @@
 from lxml.html import fromstring
 import requests
-import traceback
 
 def get_proxies():
 	url = 'https://sslproxies.org/'

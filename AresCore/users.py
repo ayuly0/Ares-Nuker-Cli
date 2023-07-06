@@ -11,8 +11,10 @@ headers = global_vars.headers
 headers_account = global_vars.headers_account
 config = global_vars.config
 
-def GetGuildMembers(guild_id) -> None:
+def GetGuildMembers(guild_id) -> list:
 	r = requests.get(f"https://discord.com/api/v8/guilds/{guild_id}/members", headers = headers)
+	console.log(r.text)
+	input()
 	json_members = json.loads(r.text)
 	members = []
 	for i in range(0, len(json_members) - 1):
@@ -61,12 +63,14 @@ def BanAll() -> None:
 	members = GetGuildMembers(guild_id=global_vars.guild_id)
 	bot_id = GetBotId()
 	for member in members:
-		if member['id'] != config['discord']['user_id'] or member['id'] != str(bot_id):
-			try:
-				q.put((requests.put, f'https://discord.com/api/v8/guilds/{global_vars.guild_id}/bans/{member["id"]}', headers, payload))
-				console.log(f'Baned → {member["name"]}')
-			except:
-				console.error(f'Unble to ban → {member["name"]}')
+		# if member['id'] != config['discord']['user_id']:
+		try:
+			q.put((requests.put, f'https://discord.com/api/v8/guilds/{global_vars.guild_id}/bans/{member["id"]}', headers, payload))
+			console.log(f'Baned → {member["name"]}')
+		except:
+			console.error(f'Unble to ban → {member["name"]}')
+	print(global_vars.guild_id)
+	input()
 
 def UserAvatar() -> None:
 	payload = {

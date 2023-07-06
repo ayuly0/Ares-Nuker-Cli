@@ -15,9 +15,11 @@ def TokenChecker():
 	if type == '1':
 		token = rconsole.input(' [white][[purple]~/check-type/token[white]] [purple]>[grey78] ')
 		if CheckToken(token, 'account'):
-			console.log(f'Token is vaild: {token}')
+			rconsole.print(f'[purple] > Token is [green]vaild: {token}')
+			input()
 		else:
-			console.log(f'Token is invaild: {token}')
+			rconsole.print(f'[purple] > Token is [red1]invaild: {token}')
+			input()
 
 	elif type == '2':
 		file = rconsole.input(' [white][[purple]~/check-type/file[white]] [purple]>[grey78] ')
@@ -34,8 +36,8 @@ def TokenChecker():
 				with open('../live_token.txt', 'a+') as f:
 					f.write(f'{token}\n')
 				clear()
-				rconsole.print(f'[green] > [{index+1}/{len(tokens)}] Token is vaild >> {token}')
+				rconsole.print(f'[purple] > [{index+1}/{len(tokens)}] Token is [green]vaild >> {token}')
 			else:
 				clear()
-				rconsole.print(f'[red1] > [{index+1}/{len(tokens)}] Token is invaild >> {token}')
+				rconsole.print(f'[purple] > [{index+1}/{len(tokens)}] Token is [red1]invaild >> {token}')
 				invaild_tokens.append(token)
